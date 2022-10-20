@@ -37,7 +37,7 @@ def main(args):
         cur_img = nib.load(cur_img_path)
         header, voxels  = cur_img.header, cur_img.get_fdata()
         voxels_min, voxels_max = np.min(voxels), np.max(voxels)
-        voxels_converted = ((voxels + voxels_min) / voxels_max)*255
+        voxels_converted = ((voxels - voxels_min) / (voxels_max-voxels_min))*255
         target_image_folder = os.path.join(target_folder,image.split(".")[0])
         if not os.path.exists(target_image_folder):
             os.mkdir(target_image_folder)
